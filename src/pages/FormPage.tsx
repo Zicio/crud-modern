@@ -1,4 +1,4 @@
-const Form = () => {
+const FormPage = () => {
   return (
     <form action="" className="form">
       <input type="name" />
@@ -8,4 +8,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormPage;
