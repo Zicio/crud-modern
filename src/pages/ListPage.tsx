@@ -4,9 +4,9 @@ import { useServicesQuery } from "../store/crud/crud.api";
 const ListPage = () => {
   const { isLoading, isError, data } = useServicesQuery();
   return (
-    <div className="flex justify-center mx-auto pt-[20px]">
+    <div className="flex justify-center mx-auto h-screen text-lg">
       {isLoading && (
-        <div>
+        <div className="m-auto">
           <svg
             aria-hidden="true"
             className="mr-2 w-8 h-8 text-gray-200 animate-spin fill-red-600"
@@ -27,12 +27,12 @@ const ListPage = () => {
         </div>
       )}
       {isError && (
-        <div className="bg-red-400 border-[5px] border-solid border-red-600 p-[15px]">
+        <div className="bg-red-400 border-[5px] border-solid border-red-600 p-[15px] m-auto">
           Произошла ошибка
         </div>
       )}
       {data && (
-        <ul className="list-none w-fit">
+        <ul className="list-none w-fit mt-[40px]">
           {data.map((service, index) => (
             <CardComponent
               card={service}
