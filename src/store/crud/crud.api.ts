@@ -5,7 +5,7 @@ export const crudApi = createApi({
   reducerPath: "crud/api",
   baseQuery: fetchBaseQuery({
     // baseUrl: "http://localhost:7777/",
-    baseUrl: "https://crud-router-server.vercel.app/",
+    baseUrl: "https://api-redux-server.vercel.app/",
   }),
   refetchOnFocus: true,
   endpoints: (build) => ({
