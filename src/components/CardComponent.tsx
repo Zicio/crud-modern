@@ -1,4 +1,5 @@
 import { IService } from "../models/models";
+import { useDeleteServiceMutation } from "../store/crud/crud.api";
 
 const CardComponent = ({
   card,
@@ -7,6 +8,13 @@ const CardComponent = ({
   card: IService;
   isFirst: boolean;
 }) => {
+  const [deleteService, { isLoading, isError }] = useDeleteServiceMutation();
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    deleteService(card.id);
+  };
+
   return (
     <li
       className={`border border-solid border-blue-200 rounded-md shadow-sm shadow-red-600 p-[15px] ${
@@ -25,6 +33,7 @@ const CardComponent = ({
         <button
           className="bg-red-600 rounded-md px-[5px] py-[2px] text-white ml-[5px] hover:shadow-md hover:shadow-black"
           type="submit"
+          onClick={handleDelete}
         >
           ╳
         </button>
