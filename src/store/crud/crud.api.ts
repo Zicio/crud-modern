@@ -17,6 +17,13 @@ export const crudApi = createApi({
       }),
       providesTags: (result) => ["Services"],
     }),
+
+    editService: build.query<IService, string>({
+      query: (id: string) => ({
+        url: `services?id=${id}`,
+      }),
+    }),
+
     deleteService: build.mutation<any, number>({
       query: (id) => ({
         url: `services`,
@@ -30,5 +37,8 @@ export const crudApi = createApi({
   }),
 });
 
-export const { useServicesQuery } = crudApi;
-export const { useDeleteServiceMutation } = crudApi;
+export const {
+  useServicesQuery,
+  useDeleteServiceMutation,
+  useEditServiceQuery,
+} = crudApi;

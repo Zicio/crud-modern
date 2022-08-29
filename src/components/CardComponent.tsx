@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IService } from "../models/models";
 import { useDeleteServiceMutation } from "../store/crud/crud.api";
 
@@ -46,12 +47,14 @@ const CardComponent = ({
           </button>
         ) : (
           <>
-            <button
-              className="bg-blue-700 rounded-md px-[5px] py-[2px] text-white hover:shadow-md hover:shadow-black"
-              type="submit"
-            >
-              🖉
-            </button>
+            <Link to={`${card.id}`}>
+              <button
+                className="bg-blue-700 rounded-md px-[5px] py-[2px] text-white hover:shadow-md hover:shadow-black"
+                type="submit"
+              >
+                🖉
+              </button>
+            </Link>
             <button
               className="bg-red-600 rounded-md px-[5px] py-[2px] text-white ml-[5px] hover:shadow-md hover:shadow-black"
               type="submit"

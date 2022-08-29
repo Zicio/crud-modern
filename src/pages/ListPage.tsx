@@ -4,7 +4,7 @@ import { useServicesQuery } from "../store/crud/crud.api";
 const ListPage = () => {
   const { isLoading, isError, data } = useServicesQuery();
   return (
-    <div className="flex justify-center mx-auto h-screen text-lg">
+    <>
       {isLoading && (
         <div className="m-auto">
           <svg
@@ -43,7 +43,7 @@ const ListPage = () => {
           </ul>
         )
       )}
-    </div>
+    </>
   );
 };
 
