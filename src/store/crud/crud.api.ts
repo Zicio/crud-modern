@@ -9,11 +9,13 @@ export const crudApi = createApi({
     //   "https://6307c6c34a7a5f007d97a70a--silly-peony-29035d.netlify.app/",
   }),
   refetchOnFocus: true,
+  tagTypes: ["Services"],
   endpoints: (build) => ({
     services: build.query<IService[], void>({
       query: () => ({
         url: "services",
       }),
+      providesTags: (result) => ["Services"],
     }),
     deleteService: build.mutation<any, number>({
       query: (id) => ({
@@ -23,6 +25,7 @@ export const crudApi = createApi({
         },
         method: "DELETE",
       }),
+      invalidatesTags: ["Services"],
     }),
   }),
 });

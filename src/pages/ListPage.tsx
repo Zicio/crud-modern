@@ -26,21 +26,22 @@ const ListPage = () => {
           <span className="sr-only">Loading...</span>
         </div>
       )}
-      {isError && (
+      {isError ? (
         <div className="bg-red-400 border-[5px] border-solid border-red-600 p-[15px] m-auto">
           Произошла ошибка
         </div>
-      )}
-      {data && (
-        <ul className="list-none w-fit mt-[40px]">
-          {data.map((service, index) => (
-            <CardComponent
-              card={service}
-              key={service.id}
-              isFirst={index === 0}
-            />
-          ))}
-        </ul>
+      ) : (
+        data && (
+          <ul className="list-none w-fit mt-[40px]">
+            {data.map((service, index) => (
+              <CardComponent
+                card={service}
+                key={service.id}
+                isFirst={index === 0}
+              />
+            ))}
+          </ul>
+        )
       )}
     </div>
   );
