@@ -3,7 +3,7 @@ import ErrorWindow from "../components/ErrorWindow";
 import Loader from "../components/Loader";
 import { useServicesQuery } from "../store/crud/crud.api";
 
-const ListPage = () => {
+const ListPage: React.FC = () => {
   const { isLoading, isError, data } = useServicesQuery();
   return (
     <>

@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ErrorWindow from "../../components/ErrorWindow";
 import Loader from "../../components/Loader";
 import { IService } from "../../models/models";
-import { useEditServiceQuery } from "../../store/crud/crud.api";
+import {
+  useEditServiceQuery,
+  useModifyServiceMutation,
+} from "../../store/crud/crud.api";
 import "./FormPages.css";
 
-const FormPage = () => {
+const FormPage: React.FC = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useEditServiceQuery(id!);
-  console.log(data);
+  const [modifyService, { data: dataModify }] = useModifyServiceMutation();
   const [form, setForm] = useState<IService>(data!);
 
+  const navigate = useNavigate();
   useEffect(() => {
     setForm(data!); //! Разобраться с "!" и попробовать задать начальный стейт пустой
   }, [data]);
@@ -20,6 +24,12 @@ const FormPage = () => {
     const name = e.target.name;
     const value = e.target.value;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  };
+
+  const handleModify = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    modifyService(form);
+    navigate("/");
   };
 
   return (
@@ -73,7 +83,11 @@ const FormPage = () => {
                   Отмена
                 </button>
               </Link>
-              <button className="button bg-blue-600 ml-[10px]" type="submit">
+              <button
+                className="button bg-blue-600 ml-[10px]"
+                type="submit"
+                onClick={handleModify}
+              >
                 Изменить
               </button>
             </div>

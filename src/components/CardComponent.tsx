@@ -3,12 +3,9 @@ import { IService } from "../models/models";
 import { useDeleteServiceMutation } from "../store/crud/crud.api";
 import Loader from "./Loader";
 
-const CardComponent = ({
+const CardComponent: React.FC<{ card: IService; isFirst: boolean }> = ({
   card,
   isFirst,
-}: {
-  card: IService;
-  isFirst: boolean;
 }) => {
   const [deleteService, { isLoading }] = useDeleteServiceMutation();
 
