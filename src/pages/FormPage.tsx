@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import ErrorWindow from "../../components/ErrorWindow";
-import Loader from "../../components/Loader";
-import { IService } from "../../models/models";
+import ErrorWindow from "../components/ErrorWindow";
+import Loader from "../components/Loader";
+import { IService } from "../models/models";
 import {
-  useEditServiceQuery,
+  useFormServiceQuery,
   useModifyServiceMutation,
-} from "../../store/crud/crud.api";
-import "./FormPages.css";
+} from "../store/crud/crud.api";
 
 const FormPage: React.FC = () => {
   const { id } = useParams();
-  const { data, isLoading, isError } = useEditServiceQuery(id!);
-  const [modifyService, { data: dataModify }] = useModifyServiceMutation();
+  const { data, isError, isLoading } = useFormServiceQuery(id!);
+  const [modifyService] = useModifyServiceMutation();
   const [form, setForm] = useState<IService>(data!);
 
   const navigate = useNavigate();
   useEffect(() => {
-    setForm(data!); //! Разобраться с "!" и попробовать задать начальный стейт пустой
+    setForm(data!);
   }, [data]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +25,14 @@ const FormPage: React.FC = () => {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const handleModify = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleModify = (e: React.FormEvent) => {
     e.preventDefault();
     modifyService(form);
     navigate("/");
   };
 
   return (
-    <>
+    <div className="flex justify-center items-start mx-auto h-screen text-lg">
       {isLoading && (
         <div className="m-auto">
           <Loader />
@@ -43,7 +42,10 @@ const FormPage: React.FC = () => {
         <ErrorWindow />
       ) : (
         form && (
-          <form className="border border-blue-400 rounded-md shadow-sm shadow-red-600 p-[15px] mt-[40px]">
+          <form
+            className="border border-blue-400 rounded-md shadow-sm shadow-red-600 p-[15px] mt-[40px]"
+            onSubmit={handleModify}
+          >
             <label className="label mt-[0px]" htmlFor="name">
               Название
             </label>
@@ -54,6 +56,7 @@ const FormPage: React.FC = () => {
               id="name"
               value={form.name}
               onChange={handleChange}
+              required
             />
             <label className="label" htmlFor="price">
               Стоимость
@@ -61,10 +64,11 @@ const FormPage: React.FC = () => {
             <input
               className="input"
               name="price"
-              type="text"
+              type="number"
               id="price"
               value={form.price}
               onChange={handleChange}
+              required
             />
             <label className="label" htmlFor="content">
               Описание
@@ -76,6 +80,7 @@ const FormPage: React.FC = () => {
               id="content"
               value={form.content}
               onChange={handleChange}
+              required
             />
             <div className="flex justify-end mt-[20px]">
               <Link to="/">
@@ -83,18 +88,14 @@ const FormPage: React.FC = () => {
                   Отмена
                 </button>
               </Link>
-              <button
-                className="button bg-blue-600 ml-[10px]"
-                type="submit"
-                onClick={handleModify}
-              >
+              <button className="button bg-blue-600 ml-[10px]" type="submit">
                 Изменить
               </button>
             </div>
           </form>
         )
       )}
-    </>
+    </div>
   );
 };
 

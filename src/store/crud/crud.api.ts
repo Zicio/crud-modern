@@ -8,7 +8,7 @@ export const crudApi = createApi({
     baseUrl: "http://localhost:7777/",
   }),
   refetchOnFocus: true,
-  tagTypes: ["Services"],
+  tagTypes: ["Services", "Form"],
   endpoints: (build) => ({
     services: build.query<IService[], void>({
       query: () => ({
@@ -17,10 +17,11 @@ export const crudApi = createApi({
       providesTags: (result) => ["Services"],
     }),
 
-    editService: build.query<IService, string>({
+    formService: build.query<IService, string>({
       query: (id: string) => ({
         url: `services?id=${id}`,
       }),
+      providesTags: (result) => ["Form"],
     }),
 
     deleteService: build.mutation<StatusCode.SuccessNoContent, number>({
@@ -40,7 +41,7 @@ export const crudApi = createApi({
         method: "PUT",
         body: JSON.stringify(data),
       }),
-      invalidatesTags: ["Services"],
+      invalidatesTags: ["Services", "Form"],
     }),
   }),
 });
@@ -48,6 +49,6 @@ export const crudApi = createApi({
 export const {
   useServicesQuery,
   useDeleteServiceMutation,
-  useEditServiceQuery,
+  useFormServiceQuery,
   useModifyServiceMutation,
 } = crudApi;

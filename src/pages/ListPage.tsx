@@ -6,7 +6,7 @@ import { useServicesQuery } from "../store/crud/crud.api";
 const ListPage: React.FC = () => {
   const { isLoading, isError, data } = useServicesQuery();
   return (
-    <>
+    <div className="flex justify-start flex-col items-center mx-auto h-screen text-md mt-[40px]">
       {isLoading && (
         <div className="m-auto">
           <Loader />
@@ -16,18 +16,25 @@ const ListPage: React.FC = () => {
         <ErrorWindow />
       ) : (
         data && (
-          <ul className="list-none w-fit mt-[40px]">
-            {data.map((service, index) => (
-              <CardComponent
-                card={service}
-                key={service.id}
-                isFirst={index === 0}
-              />
-            ))}
-          </ul>
+          <>
+            <button className="mb-[20px] button bg-blue-600" type="submit">
+              Создать
+            </button>
+            <>
+              <ul className="list-none w-fit">
+                {data.map((service, index) => (
+                  <CardComponent
+                    card={service}
+                    key={service.id}
+                    isFirst={index === 0}
+                  />
+                ))}
+              </ul>
+            </>
+          </>
         )
       )}
-    </>
+    </div>
   );
 };
 
