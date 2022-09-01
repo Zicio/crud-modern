@@ -6,8 +6,9 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<ListPage />} />
-      <Route path="/:id" element={<FormPage />} />
-      <Route path="/newService" element={<FormPage />} />
+      <Route path="form" element={<FormPage />}>
+        <Route path=":id" element={<FormPage />} />
+      </Route>
     </Routes>
   );
 };

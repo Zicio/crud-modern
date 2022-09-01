@@ -29,7 +29,7 @@ const CardComponent: React.FC<{ card: IService; isFirst: boolean }> = ({
           </button>
         ) : (
           <>
-            <Link to={`${card.id}`}>
+            <Link to={`form/${card.id}`}>
               <button
                 className="bg-blue-700 rounded-md px-[5px] py-[2px] text-white hover:shadow-md hover:shadow-black"
                 type="submit"
