@@ -49,6 +49,6 @@ export const crudApi = createApi({
 export const {
   useServicesQuery,
   useDeleteServiceMutation,
-  useFormServiceQuery,
+  useLazyFormServiceQuery,
   useModifyServiceMutation,
 } = crudApi;

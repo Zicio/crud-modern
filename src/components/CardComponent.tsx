@@ -11,7 +11,9 @@ const CardComponent: React.FC<{ card: IService; isFirst: boolean }> = ({
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    deleteService(card.id);
+    if (card.id) {
+      deleteService(card.id);
+    }
   };
 
   return (

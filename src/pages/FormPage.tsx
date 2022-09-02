@@ -4,20 +4,35 @@ import ErrorWindow from "../components/ErrorWindow";
 import Loader from "../components/Loader";
 import { IService } from "../models/models";
 import {
-  useFormServiceQuery,
+  useLazyFormServiceQuery,
   useModifyServiceMutation,
 } from "../store/crud/crud.api";
 
 const FormPage: React.FC = () => {
   const { id } = useParams();
-  const { data, isError, isLoading } = useFormServiceQuery(id!);
+  const [fetchInputs, { data, isError, isLoading }] = useLazyFormServiceQuery();
   const [modifyService] = useModifyServiceMutation();
-  const [form, setForm] = useState<IService>(data!);
+  const [form, setForm] = useState<IService>({
+    name: "",
+    price: "",
+    content: "",
+  });
 
   const navigate = useNavigate();
+
   useEffect(() => {
-    setForm(data!);
-  }, [data]);
+    const checkId = async () => {
+      if (id) {
+        await fetchInputs(id);
+        setForm(data!);
+      }
+    };
+    checkId();
+  }, [fetchInputs, id]);
+
+  // useEffect(() => {
+  //   setForm(data!);
+  // }, [data]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
