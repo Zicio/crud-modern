@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ErrorWindow from "../components/ErrorWindow";
+import Form from "../components/Form";
 import Loader from "../components/Loader";
 import { IService } from "../models/models";
 import {
@@ -21,18 +22,16 @@ const FormPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkId = async () => {
-      if (id) {
-        await fetchInputs(id);
-        setForm(data!);
-      }
-    };
-    checkId();
-  }, [fetchInputs, id]);
+    if (data) {
+      setForm(data);
+    }
+  }, [data]);
 
-  // useEffect(() => {
-  //   setForm(data!);
-  // }, [data]);
+  useEffect(() => {
+    if (id) {
+      fetchInputs(id);
+    }
+  }, [fetchInputs, id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -56,59 +55,11 @@ const FormPage: React.FC = () => {
       {isError ? (
         <ErrorWindow />
       ) : (
-        form && (
-          <form
-            className="border border-blue-400 rounded-md shadow-sm shadow-red-600 p-[15px] mt-[40px]"
-            onSubmit={handleModify}
-          >
-            <label className="label mt-[0px]" htmlFor="name">
-              Название
-            </label>
-            <input
-              className="input"
-              name="name"
-              type="text"
-              id="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-            <label className="label" htmlFor="price">
-              Стоимость
-            </label>
-            <input
-              className="input"
-              name="price"
-              type="number"
-              id="price"
-              value={form.price}
-              onChange={handleChange}
-              required
-            />
-            <label className="label" htmlFor="content">
-              Описание
-            </label>
-            <input
-              className="input"
-              name="content"
-              type="text"
-              id="content"
-              value={form.content}
-              onChange={handleChange}
-              required
-            />
-            <div className="flex justify-end mt-[20px]">
-              <Link to="/">
-                <button className="button bg-red-600" type="submit">
-                  Отмена
-                </button>
-              </Link>
-              <button className="button bg-blue-600 ml-[10px]" type="submit">
-                Изменить
-              </button>
-            </div>
-          </form>
-        )
+        <Form
+          form={form}
+          handleChange={handleChange}
+          handleModify={handleModify}
+        />
       )}
     </div>
   );
