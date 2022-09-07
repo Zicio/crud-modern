@@ -6,7 +6,8 @@ export interface IService {
 }
 
 export interface IFormProps {
+  clear: boolean;
   form: IService;
-  handleModify: React.FormEventHandler<HTMLFormElement>;
+  handleFetch: React.FormEventHandler<HTMLFormElement>;
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
 }

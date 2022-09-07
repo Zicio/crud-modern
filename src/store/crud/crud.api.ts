@@ -7,7 +7,7 @@ export const crudApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:7777/",
   }),
-  refetchOnFocus: true,
+  refetchOnReconnect: true,
   tagTypes: ["Services", "Form"],
   endpoints: (build) => ({
     services: build.query<IService[], void>({
@@ -43,6 +43,15 @@ export const crudApi = createApi({
       }),
       invalidatesTags: ["Services", "Form"],
     }),
+
+    newService: build.mutation<StatusCode.SuccessNoContent, IService>({
+      query: (data: IService) => ({
+        url: `services`,
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: ["Services"],
+    }),
   }),
 });
 
@@ -51,4 +60,5 @@ export const {
   useDeleteServiceMutation,
   useLazyFormServiceQuery,
   useModifyServiceMutation,
+  useNewServiceMutation,
 } = crudApi;
