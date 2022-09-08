@@ -1,9 +1,11 @@
-const Loader = () => {
+const Loader: React.FC<{ size: string }> = (props) => {
+  const { size } = props;
+
   return (
-    <button type="submit" className="button bg-red-600" disabled={true}>
+    <>
       <svg
         aria-hidden="true"
-        className=" w-[17px] h-[17px] text-blue-200 animate-spin fill-red-600"
+        className={`loader-svg loader-svg-${size}`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="https://loading.io/asset/595554"
@@ -18,7 +20,7 @@ const Loader = () => {
         />
       </svg>
       <span className="sr-only">Loading...</span>
-    </button>
+    </>
   );
 };
 

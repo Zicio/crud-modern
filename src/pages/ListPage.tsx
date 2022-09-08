@@ -11,7 +11,7 @@ const ListPage: React.FC = () => {
     <div className="flex justify-start flex-col items-center mx-auto h-screen text-md mt-[40px]">
       {isLoading && (
         <div className="m-auto">
-          <Loader />
+          <Loader size={"big"} />
         </div>
       )}
       {isError ? (

@@ -15,10 +15,8 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
   const [fetchInputs, { data, isError, isLoading }] = useLazyFormServiceQuery();
   const [modifyService, { isError: modifyError, isLoading: modifyLoading }] =
     useModifyServiceMutation();
-  const [
-    fetchForm,
-    { data: newData, isError: newError, isLoading: newLoading },
-  ] = useNewServiceMutation();
+  const [fetchForm, { isError: newError, isLoading: newLoading }] =
+    useNewServiceMutation();
 
   const [form, setForm] = useState<IService>({
     name: "",
@@ -38,7 +36,7 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
     if (id) {
       fetchInputs(id);
     }
-  }, [fetchInputs, id]);
+  }, [id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -53,18 +51,11 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
     } else {
       await modifyService(form);
     }
-    if (newData) {
-      navigate("/");
-    }
+    navigate("/");
   };
 
   return (
-    <div className="flex justify-center items-start mx-auto h-screen text-base">
-      {isLoading && (
-        <div className="m-auto">
-          <Loader />
-        </div>
-      )}
+    <div className="flex justify-center items-start mx-auto h-screen text-md">
       {isError || newError || modifyError ? (
         <ErrorWindow />
       ) : (
@@ -76,51 +67,69 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
             Название
           </label>
           <input
-            className="input"
+            className={`input ${
+              isLoading || newLoading || modifyLoading
+                ? "input-unactive"
+                : "input-active"
+            }`}
             name="name"
             type="text"
             id="name"
             value={form.name}
             onChange={handleChange}
-            disabled={newLoading || modifyLoading}
+            disabled={isLoading || newLoading || modifyLoading}
             required
           />
           <label className="label" htmlFor="price">
             Стоимость
           </label>
           <input
-            className="input"
+            className={`input ${
+              isLoading || newLoading || modifyLoading
+                ? "input-unactive"
+                : "input-active"
+            }`}
             name="price"
             type="number"
             id="price"
             value={form.price}
             onChange={handleChange}
-            disabled={newLoading || modifyLoading}
+            disabled={isLoading || newLoading || modifyLoading}
             required
           />
           <label className="label" htmlFor="content">
             Описание
           </label>
           <input
-            className="input"
+            className={`input ${
+              isLoading || newLoading || modifyLoading
+                ? "input-unactive"
+                : "input-active"
+            }`}
             name="content"
             type="text"
             id="content"
             value={form.content}
             onChange={handleChange}
-            disabled={newLoading || modifyLoading}
+            disabled={isLoading || newLoading || modifyLoading}
             required
           />
           <div className="flex justify-end mt-[20px]">
-            {newLoading || modifyLoading ? (
-              <Loader />
+            {isLoading || newLoading || modifyLoading ? (
+              <button
+                type="submit"
+                className="button bg-red-600 hover:shadow-none"
+                disabled
+              >
+                <Loader size={"small"} />
+              </button>
             ) : (
               <>
                 <Link to="/">
                   <button
                     className="button bg-red-600"
                     type="submit"
-                    disabled={newLoading || modifyLoading}
+                    disabled={isLoading || newLoading || modifyLoading}
                   >
                     Отмена
                   </button>
@@ -128,7 +137,7 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
                 <button
                   className="button bg-blue-600 ml-[10px]"
                   type="submit"
-                  disabled={newLoading || modifyLoading}
+                  disabled={isLoading || newLoading || modifyLoading}
                 >
                   {clear ? "Создать" : "Изменить"}
                 </button>

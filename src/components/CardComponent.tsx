@@ -26,7 +26,13 @@ const CardComponent: React.FC<{ card: IService; isFirst: boolean }> = ({
       <p className="mt-[5px]">{card.price}</p>
       <div className="flex mt-[5px] justify-end">
         {isLoading ? (
-          <Loader />
+          <button
+            type="submit"
+            className="button bg-red-600 hover:shadow-none"
+            disabled
+          >
+            <Loader size={"small"} />
+          </button>
         ) : (
           <>
             <Link to={`form/${card.id}`}>
