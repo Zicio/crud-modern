@@ -125,7 +125,7 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
               </button>
             ) : (
               <>
-                <Link to="/">
+                <Link to="/crud-modern">
                   <button
                     className="button bg-red-600"
                     type="submit"
