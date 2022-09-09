@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/crud-modern/static/css/main.5d53b485.css",
+    "main.js": "/crud-modern/static/js/main.30d2a26a.js",
+    "index.html": "/crud-modern/index.html",
+    "main.5d53b485.css.map": "/crud-modern/static/css/main.5d53b485.css.map",
+    "main.30d2a26a.js.map": "/crud-modern/static/js/main.30d2a26a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5d53b485.css",
+    "static/js/main.30d2a26a.js"
+  ]
+}
