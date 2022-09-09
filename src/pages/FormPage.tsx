@@ -51,7 +51,7 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
     } else {
       await modifyService(form);
     }
-    navigate("/");
+    navigate("/crud-modern");
   };
 
   return (
