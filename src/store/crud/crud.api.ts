@@ -5,7 +5,8 @@ import { StatusCode } from "status-code-enum";
 export const crudApi = createApi({
   reducerPath: "crud/api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:7777/",
+    // baseUrl: "http://localhost:7777/",
+    baseUrl: "https://api-redux-server.vercel.app/",
   }),
   refetchOnReconnect: true,
   tagTypes: ["Services"],
