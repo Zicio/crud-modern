@@ -36,7 +36,7 @@ const FormPage: React.FC<{ clear: boolean }> = (props) => {
     if (id) {
       fetchInputs(id);
     }
-  }, [id]);
+  }, [fetchInputs, id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
