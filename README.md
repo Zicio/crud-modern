@@ -1,5 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/l46wybcj2rdvf99p?svg=true)](https://ci.appveyor.com/project/Zicio/crud-modern)
 
+[Ссылка на GP](https://zicio.github.io/crud-modern/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
