@@ -1,4 +1,4 @@
-https://github.com/Zicio/React-TypeScript-Redux-Toolkit-RTKQuery-Tailwind
+[![Build status](https://ci.appveyor.com/api/projects/status/l46wybcj2rdvf99p?svg=true)](https://ci.appveyor.com/project/Zicio/crud-modern)
 
 # Getting Started with Create React App
 
