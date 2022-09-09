@@ -5,9 +5,15 @@ import ListPage from "../pages/ListPage";
 const App = () => {
   return (
     <Routes>
-      <Route path="form/:id" element={<FormPage clear={false} />} />
-      <Route path="form" element={<FormPage clear={true} />}></Route>
-      <Route path="/" element={<ListPage />} />
+      <Route
+        path="/crud-modern/form/:id"
+        element={<FormPage clear={false} />}
+      />
+      <Route
+        path="/crud-modern/form"
+        element={<FormPage clear={true} />}
+      ></Route>
+      <Route path="/crud-modern/" element={<ListPage />} />
     </Routes>
   );
 };
